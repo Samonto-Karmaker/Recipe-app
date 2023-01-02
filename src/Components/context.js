@@ -2,15 +2,19 @@ import React, {useContext, useEffect, useState} from "react";
 
 const AppContext = React.createContext()
 
-const allRecipes = "https://www.themealdb.com/api/json/v1/1/search.php?s="
-const randomRecipe = "https://www.themealdb.com/api/json/v1/1/random.php"
+const allRecipesUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s="
+const randomRecipeUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
 
 const AppProvider = ({children}) => {
+
+    let [allRecipes, setAllRecipes] = useState([])
+
     const fetchData = async url => {
         try{
             const response = await fetch(url)
-            const data = await response.json()
-            console.log(data)
+            let data = await response.json()
+            setAllRecipes(data)
+            console.log(allRecipes)
         }
         catch (error){
             console.log(error)
@@ -18,11 +22,11 @@ const AppProvider = ({children}) => {
     }
 
     useEffect(() => {
-        fetchData(allRecipes)
+        fetchData(allRecipesUrl)
     }, [])
 
     return(
-        <AppContext.Provider value="Hello World">
+        <AppContext.Provider value={allRecipes}>
             {children}
         </AppContext.Provider>
     )

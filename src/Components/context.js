@@ -8,6 +8,7 @@ const randomRecipeUrl = "https://www.themealdb.com/api/json/v1/1/random.php"
 const AppProvider = ({children}) => {
 
     let [allRecipes, setAllRecipes] = useState([])
+    let [searchTerm, setSearchTerm] = useState('')
 
     const fetchData = async url => {
         try{
@@ -21,12 +22,22 @@ const AppProvider = ({children}) => {
         }
     }
 
+    const fetchRandom = () => {
+        fetchData(randomRecipeUrl)
+    }
+
     useEffect(() => {
         fetchData(allRecipesUrl)
     }, [])
 
+    useEffect(() => {
+        if(searchTerm !== ""){
+            fetchData(`${allRecipesUrl}${searchTerm}`)
+        }
+    }, [searchTerm])
+
     return(
-        <AppContext.Provider value={allRecipes}>
+        <AppContext.Provider value={{allRecipes, setSearchTerm, fetchRandom}}>
             {children}
         </AppContext.Provider>
     )

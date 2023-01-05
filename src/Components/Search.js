@@ -1,9 +1,12 @@
 import React, {useState, useContext} from "react";
+import { AppContext } from "./context";
 import "../App.css"
 
 const Search = () => {
 
     const [search, setSearch] = useState("")
+
+    const {setSearchTerm, fetchRandom} = useContext(AppContext)
 
     const handleInputChange = event => {
         setSearch(event.target.value)
@@ -11,6 +14,15 @@ const Search = () => {
 
     const handleSearchSubmit = event => {
         event.preventDefault()
+        if(search){
+            setSearchTerm(search)
+        }
+    }
+
+    const handleRandomMeals = () => {
+        setSearchTerm("")
+        setSearch("")
+        fetchRandom()
     }
 
     return(
@@ -23,10 +35,10 @@ const Search = () => {
                     value={search}
                     onChange={handleInputChange}
                 />
-                <button type="submit"className="btn">
+                <button type="submit" className="btn">
                     Search
                 </button>
-                <button type="button"className="btn btn-hipster">
+                <button type="button" className="btn btn-hipster" onClick={handleRandomMeals}>
                     Suprise me!!
                 </button>
             </form>

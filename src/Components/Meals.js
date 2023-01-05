@@ -4,13 +4,13 @@ import "../App.css"
 import {BiLike} from "react-icons/bi"
 
 const Meals = () => {
-    const {meals} = useContext(AppContext)
+    const {allRecipes} = useContext(AppContext)
+    const meals = allRecipes["meals"]
     console.log(meals)
 
     if(meals === undefined || meals ===[]){
         return(
             <div>
-                <h1>Meals</h1>
                 <section className="section">
                     <h5>Loading...</h5>
                 </section>
@@ -21,7 +21,6 @@ const Meals = () => {
     if(meals === null){
         return(
             <div>
-                <h1>Meals</h1>
                 <section className="section">
                     <h5>No Reacipe Found!</h5>
                 </section>
@@ -31,7 +30,6 @@ const Meals = () => {
 
     return(
         <div>
-            <h1>Meals</h1>
             <section className="section-center">
                 {meals.map(meal => {
                     const {idMeal, strMeal: title, strMealThumb: image} = meal

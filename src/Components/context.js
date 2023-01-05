@@ -9,6 +9,8 @@ const AppProvider = ({children}) => {
 
     let [allRecipes, setAllRecipes] = useState([])
     let [searchTerm, setSearchTerm] = useState('')
+    let [showModal, setShowModal] = useState(false)
+    let [selectedRecipe, setSelectedRecipe] = useState(null)
 
     const fetchData = async url => {
         try{
@@ -26,6 +28,16 @@ const AppProvider = ({children}) => {
         fetchData(randomRecipeUrl)
     }
 
+    const selectRecipe = idMeal => {
+        let r = allRecipes["meals"].find(r => r.idMeal === idMeal)
+        setSelectedRecipe(r)
+        setShowModal(true)
+    }
+
+    const closeModal = () => {
+        setShowModal(false)
+    }
+
     useEffect(() => {
         fetchData(allRecipesUrl)
     }, [])
@@ -37,7 +49,15 @@ const AppProvider = ({children}) => {
     }, [searchTerm])
 
     return(
-        <AppContext.Provider value={{allRecipes, setSearchTerm, fetchRandom}}>
+        <AppContext.Provider value={{
+            allRecipes, 
+            setSearchTerm, 
+            fetchRandom, 
+            showModal,
+            selectedRecipe,
+            selectRecipe,
+            closeModal
+        }}>
             {children}
         </AppContext.Provider>
     )

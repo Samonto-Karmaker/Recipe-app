@@ -4,7 +4,7 @@ import "../App.css"
 import {BiLike} from "react-icons/bi"
 
 const Meals = () => {
-    const {allRecipes} = useContext(AppContext)
+    const {allRecipes, selectRecipe} = useContext(AppContext)
     const meals = allRecipes["meals"]
     console.log(meals)
 
@@ -35,7 +35,7 @@ const Meals = () => {
                     const {idMeal, strMeal: title, strMealThumb: image} = meal
                     return(
                         <article key={idMeal} className="single-meal">
-                            <img src={image} className="img"/>
+                            <img src={image} className="img" onClick={() => selectRecipe(idMeal)}/>
                             <div>
                                 <h5>{title}</h5>
                                 <button className="like-btn"><BiLike /></button>

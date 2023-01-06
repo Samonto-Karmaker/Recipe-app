@@ -28,6 +28,10 @@ const AppProvider = ({children}) => {
         fetchData(randomRecipeUrl)
     }
 
+    const fetchAll = () => {
+        fetchData(allRecipesUrl)
+    }
+
     const selectRecipe = idMeal => {
         let r = allRecipes["meals"].find(r => r.idMeal === idMeal)
         setSelectedRecipe(r)
@@ -56,7 +60,8 @@ const AppProvider = ({children}) => {
             showModal,
             selectedRecipe,
             selectRecipe,
-            closeModal
+            closeModal,
+            fetchAll
         }}>
             {children}
         </AppContext.Provider>

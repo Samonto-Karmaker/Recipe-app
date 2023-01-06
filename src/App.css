@@ -315,3 +315,17 @@ ul {
   background: var(--red-dark);
   color: var(--white);
 }
+
+.home-btn{
+  background: transparent;
+  border: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 10px;
+  background: var(--primary-700);
+}
+
+.home-btn:hover{
+  background: var(--red-dark);
+}

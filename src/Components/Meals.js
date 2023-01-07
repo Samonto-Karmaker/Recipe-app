@@ -4,7 +4,7 @@ import "../App.css"
 import {BiLike} from "react-icons/bi"
 
 const Meals = () => {
-    const {allRecipes, selectRecipe} = useContext(AppContext)
+    const {allRecipes, selectRecipe, addToFav, favouriteList} = useContext(AppContext)
     const meals = allRecipes["meals"]
     console.log(meals)
 
@@ -38,7 +38,12 @@ const Meals = () => {
                             <img src={image} className="img" onClick={() => selectRecipe(idMeal)}/>
                             <div>
                                 <h5>{title}</h5>
-                                <button className="like-btn"><BiLike /></button>
+                                <button 
+                                    className={favouriteList.find(r => r.idMeal === idMeal) ? "like-btn liked" : "like-btn"} 
+                                    onClick={() => addToFav(idMeal)}
+                                >
+                                    <BiLike />
+                                </button>
                             </div>
                         </article>
                     )

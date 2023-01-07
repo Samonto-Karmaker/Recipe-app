@@ -278,8 +278,10 @@ ul {
 
 .modal-container{
   width: 80vw;
-  max-width: 800px;
-  height: 80vh;
+  max-width: 400px;
+  height: 90vh;
+  margin-top: 7vh;
+  margin-bottom: 3vh;
   overflow: scroll;
   background: var(--white);
   border-radius: var(--borderRadius);
